@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<conio.h>
+#define SIZE 02
+int stack[SIZE], top = -1;   
+void push(int);  
+int pop();  
+void Traverse();  
+
+
+void main()
+ {   int value, choice, ele;   
+     while(1)
+     {     
+       printf("\n\n***** MENU *****\n");
+       printf("1. Push\n 2. Pop\n 3. Traverse\n 4.Exit"); 
+       printf("\nEnter your choice: ");   
+       scanf("%d",&choice); 
+       switch(choice)
+       {case 1: 
+                printf("Enter the value to insert:"); 
+	            scanf("%d",&value);  
+	            push(value);   
+	     break; 
+         case 2: 
+                 ele=pop();  
+                 printf("\n%d is deleted",ele);  
+         break; 
+         case 3: 
+                 Traverse(); 
+         break; 
+         case 4:  
+                  goto X; 
+         default: 
+                  printf("\nWrong selection Try again!!!"); 
+        }// switch – case  
+    }// while 
+    X:
+       printf("Program over");
+ } // main
+
+
+void push(int value)
+{    if(top==SIZE-1) // fill the condition
+            printf("\nStack Overflow … "); 
+       else  // write the code for insertion
+       {  
+           top++;
+           stack[top]=value;
+       
+            
+       }
+}
+
+void Traverse()
+{ 
+    int  i;
+    if(top== -1 )   // write the condition
+        printf("\nStack Underflow");  
+   else
+   {   
+      printf("\nStack elements are:"); 
+      for(i=top;i>=0;i--)   // write the looping statement
+      printf("\n%d",stack[i]); 
+       
+   }
+ }
+ 
+int pop()
+{ 
+    int e; 
+     if(top== -1) // Write the underflow condition
+            {printf("\nStack Underflow"); 
+            return -1;}
+     else   // write teh code to remove the element and return theremoved element
+      {   
+          e=stack[top];
+          top--;
+          return e;
+           
+      }
+       
+ }
+
+
+
