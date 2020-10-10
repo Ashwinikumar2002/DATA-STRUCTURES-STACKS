@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<ctype.h>
+
+char stackash[100];
+int top = -1;
+
+void pushash(char x)
+{
+    stackash[++top] = x;
+}
+
+char popash()
+{
+    if(top == -1)
+        return -1;
+    else
+        return stackash[top--];
+}
+
+int priorityash(char x)
+{
+    if(x == '(')
+        return 0;
+    if(x == '+' || x == '-')
+        return 1;
+    if(x == '*' || x == '/')
+        return 2;
+    return 0;
+}
+
+int main()
+{
+    char expash[100];
+    char *e, x;
+    printf("Enter the expression : ");
+    scanf("%s",expash);
+    printf("\n");
+    e = expash;
+    
+    while(*e != '\0')
+    {
+        if(isalnum(*e))
+            printf("%c ",*e);
+        else if(*e == '(')
+            pushash(*e);
+        else if(*e == ')')
+        {
+            while((x = popash()) != '(')
+                printf("%c ", x);
+        }
+        else
+        {
+            while(priorityash(stackash[top]) >= priorityash(*e))
+                printf("%c ",popash());
+            pushash(*e);
+        }
+        e++;
+    }
+    
+    
+    while(top != -1)
+    {
+        printf("%c ",popash());
+    }return 0;
+}
+
