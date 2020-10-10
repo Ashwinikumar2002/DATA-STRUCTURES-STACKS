@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<malloc.h>
+struct sllash
+{
+    int data;
+    struct sllash* next;
+}*top=NULL;
+
+struct sllash *pushash(struct sllash*top, int val)
+{
+    struct sllash* ptr;
+    ptr=(struct sllash*)malloc(sizeof(struct sllash));
+    ptr->data=val;
+    if(top==NULL)
+    {
+        ptr->next=NULL;
+        top=ptr;
+    }
+    else
+    {
+        ptr->next=top;
+        top=ptr;
+    }
+    return top;
+}
+
+struct sllash*popash(struct sllash*top)
+{
+    struct sllash*ptr;
+    ptr=top;
+    if(top==NULL)
+    {
+        printf("\n Stack underflow-");
+        
+    }
+    else
+    {
+        top=top->next;
+        printf("\n The value which is being deleted is-%d", ptr ->data);
+        free(ptr);
+        
+    }
+    return top;
+}
+    
+struct sllash* displayash(struct sllash*top)
+{
+    struct sllash* ptr;
+    ptr=top;
+    if(top==NULL)
+    {
+        printf("\n Stack is empty-");
+    }
+        else
+        {
+            while(ptr!=NULL)
+            {
+                printf("\n %d",ptr->data);
+                ptr=ptr->next;
+            }
+        }
+    
+    return top;
+}
+
+int main()
+{
+    int val,option;
+    do
+    {
+        printf("\nTHESE ARE YOUR OPTIONS-");
+        printf("\n1.PUSH");
+         printf("\n2. POP");
+          printf("\n3.DISPLAY");
+           printf("\n4. EXIT");
+           printf("\n Please enter your option-");
+           scanf("%d",&option);
+           switch(option)
+           {
+               case 1:
+               {
+                   printf("\n Enter the value which you want to insert-");
+                   scanf("%d",&val);
+                   top=pushash(top, val);
+                   break;
+               }
+               case 2:
+               {
+                   top=popash(top);
+                   break;
+               }
+               case 3:
+               {
+                   top=displayash(top);
+                   break;
+               }
+               
+               
+           }
+    }while(option!=4);
+    return 0;
+}
